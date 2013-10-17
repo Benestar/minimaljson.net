@@ -64,6 +64,11 @@ jsonObject.toString();
 jsonArray.toString();
 ```
 
+Download
+--------
+
+You can download a compiled version of this framework [here](https://github.com/Benestar/minimaljson.net/blob/master/MinimalJson.zip?raw=true).
+
 License
 -------
 
