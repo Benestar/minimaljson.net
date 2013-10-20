@@ -27,30 +27,25 @@ namespace MinimalJson
             this.str = str;
         }
 
-
         internal override void write(JsonWriter writer)
         {
             writer.writeString(str);
         }
-
 
         public override bool isString()
         {
             return true;
         }
 
-
         public override string asString()
         {
             return str;
         }
 
-
         public override int GetHashCode()
         {
             return str.GetHashCode();
         }
-
 
         public override bool Equals(Object obj)
         {

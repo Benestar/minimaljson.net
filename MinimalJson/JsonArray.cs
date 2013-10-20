@@ -66,12 +66,6 @@ namespace MinimalJson
             }
         }
 
-        public JsonValue this[int i]
-        {
-            get { return values[i]; }
-            set { values[i] = value; }
-        }
-
         /// <summary>
         /// Reads a JSON array from the given reader.
         /// Characters are read in chunks and buffered internally, therefore wrapping an existing reader in an additional BufferedReader does not improve reading performance.
@@ -196,7 +190,7 @@ namespace MinimalJson
         /// <param name="index">the index of the array element to replace</param>
         /// <param name="value">the value to be stored at the specified array position</param>
         /// <returns>the array itself, to enable method chaining</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, long value)
         {
             values[index] = valueOf(value);
@@ -209,7 +203,7 @@ namespace MinimalJson
         /// <param name="index">the index of the array element to replace</param>
         /// <param name="value">the value to be stored at the specified array position</param>
         /// <returns>the array itself, to enable method chaining</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, float value)
         {
             values[index] = valueOf(value);
@@ -222,7 +216,7 @@ namespace MinimalJson
         /// <param name="index">the index of the array element to replace</param>
         /// <param name="value">the value to be stored at the specified array position</param>
         /// <returns>the array itself, to enable method chaining</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, double value)
         {
             values[index] = valueOf(value);
@@ -235,7 +229,7 @@ namespace MinimalJson
         /// <param name="index">the index of the array element to replace</param>
         /// <param name="value">the value to be stored at the specified array position</param>
         /// <returns>the array itself, to enable method chaining</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, bool value)
         {
             values[index] = valueOf(value);
@@ -248,7 +242,7 @@ namespace MinimalJson
         /// <param name="index">the index of the array element to replace</param>
         /// <param name="value">the value to be stored at the specified array position</param>
         /// <returns>the array itself, to enable method chaining</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, string value)
         {
             values[index] = valueOf(value);
@@ -262,7 +256,7 @@ namespace MinimalJson
         /// <param name="value">the value to be stored at the specified array position, must not be <code>null</code></param>
         /// <returns>the array itself, to enable method chaining</returns>
         /// <exception cref="ArgumentNullException">if the value is <code>null</code></exception>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
         public JsonArray set(int index, JsonValue value)
         {
             if (value == null)
@@ -271,6 +265,37 @@ namespace MinimalJson
             }
             values[index] = value;
             return this;
+        }
+
+        /// <summary>
+        /// Removes the first appereance of the value in this array.
+        /// </summary>
+        /// <param name="value">the value to be removed from this array</param>
+        /// <returns>true if the value was successfully removed, false if it didn't exist</returns>
+        public bool remove(JsonValue value)
+        {
+            return values.Remove(value);
+        }
+
+        /// <summary>
+        /// Removes the element at the specified position in this array.
+        /// </summary>
+        /// <param name="index">the index of the array element to replace</param>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
+        public void removeAt(int index)
+        {
+            values.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// Returns the value of the element at the specified position in this array.
+        /// </summary>
+        /// <param name="index">the index of the array element to return</param>
+        /// <returns>the value of the element at the specified position</returns>
+        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index &lt; 0</code> or <code>index >= size</code></exception>
+        public JsonValue get(int index)
+        {
+            return values[index];
         }
 
         /// <summary>
@@ -289,17 +314,6 @@ namespace MinimalJson
         public bool isEmpty()
         {
             return values.Count == 0;
-        }
-
-        /// <summary>
-        /// Returns the value of the element at the specified position in this array.
-        /// </summary>
-        /// <param name="index">the index of the array element to return</param>
-        /// <returns>the value of the element at the specified position</returns>
-        /// <exception cref="ArgumentOutOfRangeException">if the index is out of range, i.e. <code>index < 0</code> or <code>index >= size</code></exception>
-        public JsonValue get(int index)
-        {
-            return values[index];
         }
 
         /// <summary>
@@ -346,7 +360,7 @@ namespace MinimalJson
                 return false;
             }
             JsonArray other = (JsonArray)obj;
-            return values == other.values;
+            return this.ToString() == other.ToString();
         }
 
         public IEnumerator GetEnumerator()

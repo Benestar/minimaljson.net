@@ -263,7 +263,7 @@ namespace MinimalJson
                         }
                         hexChars[i] = (char)current;
                     }
-                    captureBuffer.Append((char)int.Parse(hexChars.ToString(), System.Globalization.NumberStyles.HexNumber));
+                    captureBuffer.Append((char)int.Parse(new string(hexChars), System.Globalization.NumberStyles.HexNumber));
                     break;
                 default:
                     throw expected("valid escape sequence");

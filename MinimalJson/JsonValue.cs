@@ -47,6 +47,30 @@ namespace MinimalJson
             // prevent subclasses outside of this package
         }
 
+        public JsonValue this[string name]
+        {
+            get
+            {
+                return this.asObject().get(name);
+            }
+            set
+            {
+                this.asObject().set(name, value);
+            }
+        }
+
+        public JsonValue this[int i]
+        {
+            get
+            {
+                return this.asArray().get(i);
+            }
+            set
+            {
+                this.asArray().set(i, value);
+            }
+        }
+
         /// <summary>
         /// Reads a JSON value from the given reader.
         /// Characters are read in chunks and buffered internally, therefore wrapping an existing reader in
@@ -212,7 +236,7 @@ namespace MinimalJson
         }
 
         /// <summary>
-        /// Returns this JSON value as {@link JsonObject}, assuming that this value represents a JSON object. If this is not the case, an exception is thrown.
+        /// Returns this JSON value as <see cref="JsonObject"/>, assuming that this value represents a JSON object. If this is not the case, an exception is thrown.
         /// </summary>
         /// <returns>a JSONObject for this value</returns>
         /// <exception cref="NotSupportedException">if this value is not a JSON object</exception>
@@ -222,7 +246,7 @@ namespace MinimalJson
         }
 
         /// <summary>
-        /// Returns this JSON value as {@link JsonArray}, assuming that this value represents a JSON array. If this is not the case, an exception is thrown.
+        /// Returns this JSON value as <see cref="JsonArray"/>, assuming that this value represents a JSON array. If this is not the case, an exception is thrown.
         /// </summary>
         /// <returns>a JSONArray for this value</returns>
         /// <exception cref="NotSupportedException">if this value is not a JSON array</exception>

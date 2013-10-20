@@ -60,7 +60,7 @@ namespace MinimalJson
             }
             if (unmodifiable)
             {
-                throw new NotImplementedException();
+                values = new ReadOnlyDictionary<string, JsonValue>(obj.values);
             }
             else
             {
@@ -300,7 +300,7 @@ namespace MinimalJson
         /// </summary>
         /// <param name="name">the name of the member to remove</param>
         /// <returns>the object itself, to enable method chaining</returns>
-        public JsonObject remove(string name)
+        public JsonObject removeAt(string name)
         {
             values.Remove(name);
             return this;
@@ -313,7 +313,7 @@ namespace MinimalJson
         /// <returns>the value of the last member with the specified name, or <code>null</code> if this object does not contain a member with that name</returns>
         public JsonValue get(string name)
         {
-            return values[name];
+            return values.ContainsKey(name) ? values[name] : null;
         }
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace MinimalJson
                 return false;
             }
             JsonObject other = (JsonObject)obj;
-            return values == other.values;
+            return this.ToString() == other.ToString();
         }
 
         public IEnumerator GetEnumerator()

@@ -21,54 +21,45 @@ namespace MinimalJson
             this.value = value;
         }
 
-
         internal override void write(JsonWriter writer)
         {
             writer.write(value);
         }
-
 
         public override string ToString()
         {
             return value;
         }
 
-
         public override bool asBool()
         {
             return isBool() ? isTrue() : base.asBool();
         }
-
 
         public override bool isNull()
         {
             return this == NULL;
         }
 
-
         public override bool isBool()
         {
             return this == TRUE || this == FALSE;
         }
-
 
         public override bool isTrue()
         {
             return this == TRUE;
         }
 
-
         public override bool isFalse()
         {
             return this == FALSE;
         }
 
-
         public override int GetHashCode()
         {
             return value.GetHashCode();
         }
-
 
         public override bool Equals(object obj)
         {
