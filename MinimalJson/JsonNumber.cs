@@ -10,6 +10,7 @@
  *    Benestar - conversion into C#
  ******************************************************************************/
 using System;
+using System.Globalization;
 
 namespace MinimalJson
 {
@@ -54,12 +55,12 @@ namespace MinimalJson
 
         public override float asFloat()
         {
-            return float.Parse(str);
+            return float.Parse(str,CultureInfo.InvariantCulture);
         }
 
         public override double asDouble()
         {
-            return double.Parse(str);
+            return double.Parse(str,CultureInfo.InvariantCulture);
         }
 
         public override int GetHashCode()
