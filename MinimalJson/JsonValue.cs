@@ -10,6 +10,7 @@
  * Benestar - conversion into C#
  ******************************************************************************/
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace MinimalJson
@@ -126,7 +127,7 @@ namespace MinimalJson
             {
                 throw new ArgumentException("Infinite and NaN values not permitted in JSON", "value");
             }
-            return new JsonNumber(cutOffPointZero(value.ToString()));
+            return new JsonNumber(cutOffPointZero(value.ToString(CultureInfo.InvariantCulture)));
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace MinimalJson
             {
                 throw new ArgumentException("Infinite and NaN values not permitted in JSON", "value");
             }
-            return new JsonNumber(cutOffPointZero(value.ToString()));
+            return new JsonNumber(cutOffPointZero(value.ToString(CultureInfo.InvariantCulture)));
         }
 
         /// <summary>
